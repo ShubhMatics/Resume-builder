@@ -4,8 +4,8 @@ import pdfkit, os
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'
 
-# Path to wkhtmltopdf (adjust for your OS)
-path_to_wkhtmltopdf = r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
+# Required for pdfkit to work on Render
+path_to_wkhtmltopdf = '/usr/bin/wkhtmltopdf'
 config = pdfkit.configuration(wkhtmltopdf=path_to_wkhtmltopdf)
 options = {'enable-local-file-access': ''}
 
@@ -26,6 +26,8 @@ def download():
         return redirect(url_for('index'))
 
     rendered = render_template('resume_template.html', data=data, mode='pdf')
+    
+    os.makedirs("output", exist_ok=True)  # Ensure folder exists
     output_path = os.path.join('output', 'resume.pdf')
     pdfkit.from_string(rendered, output_path, configuration=config, options=options)
 
