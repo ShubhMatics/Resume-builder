@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: my-flask-app
+    env: python
+    buildCommand: ""
+    startCommand: python app.py
+    plan: free
+startCommand: |
+  apt-get update && apt-get install -y wkhtmltopdf && python app.py
