@@ -1,0 +1,13 @@
+
+Flask==2.0.1
+pdfkit==1.0.0
+gunicorn==20.1.0
+python-dotenv==0.19.2
+Flask
+pdfkit
+wkhtmltopdf
+web: python app.py
+
+
+
+
